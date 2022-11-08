@@ -62,6 +62,11 @@ namespace argparse {
         return value;
     }
 
+    template <>
+    std::string castTo<std::string>(const std::string& item) {
+        return item;
+    }
+
     template <typename T>
     std::string toString(const T& item) {
         std::ostringstream sout;
