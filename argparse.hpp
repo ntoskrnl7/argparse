@@ -155,9 +155,9 @@ namespace argparse {
         }
 
         struct Argument {
-            Argument() : short_name(""), name(""), optional(true), fixed_nargs(0), fixed(true) {}
+            Argument() : specified(false), short_name(""), name(""), optional(true), fixed_nargs(0), fixed(true) {}
             Argument(const String& _short_name, const String& _name, bool _optional, char nargs)
-                    : short_name(_short_name), name(_name), optional(_optional) {
+                    : specified(false), short_name(_short_name), name(_name), optional(_optional) {
                 if (nargs == '+' || nargs == '*') {
                     variable_nargs = nargs;
                     fixed = false;
@@ -174,7 +174,7 @@ namespace argparse {
                 char variable_nargs;
             };
             bool fixed;
-            bool specified = false;
+            bool specified;
             String canonicalName() const { return (name.empty()) ? short_name : name; }
             String toString(bool named = true) const {
                 std::ostringstream s;
